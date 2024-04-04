@@ -20,7 +20,6 @@ export const addOrder = async (req, res) => {
         }))
       )
     );
-    console.log(order);
     return res.json({ message: "succesfully add order" });
   } catch (error) {
     console.error("<addOrder>: ", error);

@@ -11,7 +11,6 @@ export const itemFindAll = () => {
 };
 
 export const itemFindOne = async (id) => {
-  console.log(id);
   const titles = await sheets.spreadsheets.values.get({
     spreadsheetId: _id,
     range: "Inventaire!A1:F1",
