@@ -25,7 +25,7 @@ export function regroupDataByCategory(data) {
 }
 
 function findSameItem(array, item, key) {
-  return array.find((i) => i && i[key] === item[key]);
+  return array.find((i) => i && i[key] === item[key].trim());
 }
 
 function addItem({ name, quantity, price, image }, id) {
