@@ -29,7 +29,7 @@ function findSameItem(array, item, key) {
 }
 
 function addItem({ name, quantity, price, image }, id) {
-  return { name, quantity, price, image, id: id + 1 };
+  return { name, quantity, price, image, id: id + 1, selectedQuantity: 1 };
 }
 function addSubcat(item, index) {
   return { subcategory: item.subcategory, items: [addItem(item, index)] };
