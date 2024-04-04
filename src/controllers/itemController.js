@@ -28,7 +28,7 @@ export const findAllItem = async (req, res) => {
 
 export const findItemById = async (req, res) => {
   try {
-    const id = parseInt(req.params.id) + 1;
+    const id = parseInt(req.params.id);
     const values = await itemFindOne(id);
 
     const titles = values.shift();
@@ -52,7 +52,7 @@ export const updateItemQuantity = async (req, res) => {
         .status(400)
         .json({ message: "La quantité acheté doit être un nombre." });
     }
-    const id = parseInt(req.params.id) + 1;
+    const id = parseInt(req.params.id);
     const values = await itemFindOne(id);
 
     const titles = values.shift();
@@ -75,5 +75,33 @@ export const updateItemQuantity = async (req, res) => {
     return res
       .status(500)
       .json({ message: "error while updating item quantity" });
+  }
+};
+
+export const retoreItemQuantity = async (req, res) => {
+  try {
+    const { items } = req.body;
+    if (!items || !items.length) {
+      return res.status(400).json({ message: "aucun item à retirer." });
+    }
+    for await (const i of items) {
+      const values = await itemFindOne(i.id);
+
+      const titles = values.shift();
+      const data = [];
+      for (const j in values) {
+        data.push(zipObject(titles, values[j]));
+      }
+
+      const newQuantity = parseInt(data[0].quantity) + parseInt(i.quantity);
+
+      await itemQuantityUpdate(i.id, newQuantity);
+    }
+    res.json({ message: "quantité restorées." });
+  } catch (error) {
+    console.error("<restoreItemQuantity: ", error);
+    return res
+      .status(500)
+      .json({ message: "error while restoring items quantity" });
   }
 };
