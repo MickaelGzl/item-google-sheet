@@ -10,6 +10,7 @@ export function regroupDataByCategory(data) {
         "subcategory"
       );
       if (sameItemSubCat) {
+        console.log(sameItemSubCat);
         sameItemSubCat.items.push(addItem(item, index));
       } else {
         sameItem.subcategory.push(addSubcat(item, index));
@@ -32,5 +33,5 @@ function addItem({ name, quantity, price, image }, id) {
   return { name, quantity, price, image, id: id + 1 };
 }
 function addSubcat(item, index) {
-  return { name: item.subcategory, item: [addItem(item, index)] };
+  return { subcategory: item.subcategory, items: [addItem(item, index)] };
 }
