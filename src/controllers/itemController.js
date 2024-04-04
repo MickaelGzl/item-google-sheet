@@ -73,7 +73,7 @@ export const updateItemQuantity = async (req, res) => {
   } catch (error) {
     console.error("<updateItemQuantity: ", error);
     return res
-      .statsus(500)
+      .status(500)
       .json({ message: "error while updating item quantity" });
   }
 };

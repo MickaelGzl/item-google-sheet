@@ -5,7 +5,7 @@ import { router as orderRoute } from "./orderRoute.js";
 export const router = Router();
 
 router.use("/items", itemRoute);
-router.use("/order", orderRoute);
+router.use("/orders", orderRoute);
 
 router.use("*", (req, res) => {
   res.status(404).json({ message: "no route corresponding" });
